@@ -27,5 +27,5 @@ Apache License 2.0
 
 ## Contact
 
-Frico Simon - [LinkedIn](https://www.linkedin.com/in/fricosimon/)
+Frico Simon - [LinkedIn](https://www.linkedin.com/in/fricosimon/)  
 Ignatius Joshua - [LinkedIn](https://www.linkedin.com/in/ignatius-joshua/)
