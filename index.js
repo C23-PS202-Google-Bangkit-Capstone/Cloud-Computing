@@ -1,7 +1,7 @@
 require('dotenv').config(); // env 
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000;
+const port = 3000;
 const multer = require('multer');
 const { Storage } = require('@google-cloud/storage'); // cloud storage
 const userKey = process.env.USER_UPLOAD_KEY; // service account's key
@@ -13,7 +13,7 @@ const filterImg = (req, file, callback) => {
     if (allowedMimeTypes.includes(file.mimetype)) {
         callback(null, true);
     } else {
-        const error = new Error('Invalid file type! Only JPEG and PNG files are allowed.');
+        const error = 'Invalid file type! Only JPEG and PNG files are allowed.';
         error.status = 403;
         callback(error);
     }
@@ -42,7 +42,9 @@ app.post('/upload', uploadImg.single('image'), (req, res) => {
     const blob = bucket.file(`testing/${img.originalname}`);
     const blobStream = blob.createWriteStream();
 
-    console.log('File information:', img.body);
+    console.log('File name:', img.originalname);
+    console.log('File size:', Math.round(img.size / 1024), "KB");
+    console.log('File MIME type:', img.mimetype);
 
     blobStream.on('error', (err) => {
         console.error(`Error uploading image: ${err.message}`);

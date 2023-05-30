@@ -10,7 +10,7 @@ COPY . .
 
 COPY .env /.env
 
-COPY /credentials/user-upload.json /credentials/user-upload.json
+COPY ./credentials/user-upload.json ./credentials/user-upload.json
 
 EXPOSE 8080
 
