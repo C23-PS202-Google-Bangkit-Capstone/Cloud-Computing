@@ -5,7 +5,7 @@ const port = process.env.PORT || 3000;
 const multer = require('multer');
 const { Storage } = require('@google-cloud/storage'); // cloud storage
 const userKey = process.env.USER_UPLOAD_KEY; // service account's key
-const storage = new Storage({ keyFilename: userKey });
+const storage = new Storage({ keyFilename: userKey }); // authentication 
 
 // checking img extension
 const filterImg = (req, file, callback) => {
@@ -13,8 +13,8 @@ const filterImg = (req, file, callback) => {
     if (allowedMimeTypes.includes(file.mimetype)) {
         callback(null, true);
     } else {
-        const error = new Error('Invalid file type. Only JPEG and PNG files are allowed.');
-        error.status = 400;
+        const error = new Error('Invalid file type! Only JPEG and PNG files are allowed.');
+        error.status = 403;
         callback(error);
     }
 };
@@ -46,7 +46,7 @@ app.post('/upload', uploadImg.single('image'), (req, res) => {
 
     blobStream.on('error', (err) => {
         console.error(`Error uploading image: ${err.message}`);
-        res.status(300).json({ error: 'Error uploading image.' });
+        res.status(408).json({ error: 'Error uploading image.' });
     });
 
     blobStream.on('finish', () => {
