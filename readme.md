@@ -1,10 +1,14 @@
 # Cloud Computing
 
-Welcome to the cloud computing repository. This repository contains the code dan deployment for the cloud computing capstone project. The project is written in Python and Node.js using the Flask and Express framework. The project is then deployed on the Google Cloud Platform and uses the Google Cloud Storage, Google Cloud App Engine, and Google Cloud Run services.
+Welcome to the cloud computing repository. This repository contains the code dan deployment for the cloud computing capstone project. The project is written in Node.js using Express framework. The project is then deployed on the Google Cloud Platform and uses the Google Cloud Storage and Google Cloud Run services.
 
 ## Project Description
 
 We will connect the Machine Learning Model with Mobile App using Cloud (Google Cloud Platform) so all the 3 learning path division can be integrated.
+
+API:
+- Authentication 
+- Uploading images
 
 ## Table of Contents
 
