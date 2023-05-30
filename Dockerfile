@@ -8,6 +8,10 @@ RUN npm install
 
 COPY . . 
 
+COPY .env /.env
+
+COPY /credentials/user-upload.json /credentials/user-upload.json
+
 EXPOSE 8080
 
 CMD ["npm", "start"]
