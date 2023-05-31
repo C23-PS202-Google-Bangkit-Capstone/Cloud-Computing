@@ -18,8 +18,16 @@ API:
 - [Contact](#Contact)
 
 ## Installation
-
-Provide instructions on how to install and set up your project. Include any dependencies or prerequisites that need to be installed.
+Install on local 
+```bash
+cd <branch name dir>
+```
+```bash
+npm install
+```
+```bash
+npm start
+```
 
 ## Usage
 
