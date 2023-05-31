@@ -1,7 +1,7 @@
 require('dotenv').config(); // env 
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const multer = require('multer');
 const { Storage } = require('@google-cloud/storage'); // cloud storage
 const userKey = process.env.USER_UPLOAD_KEY; // service account's key
