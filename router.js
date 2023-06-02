@@ -83,7 +83,7 @@ router.post('/login', loginValidation, async (req, res, next) => {
         const passwordMatch = await new Promise((resolve, reject) => {
             bcrypt.compare(
                 req.body.password,
-                queryResult[0]['password'],
+                queryResult[0]['Password'],
                 (err, result) => {
                     if (err) {
                         reject(err);
