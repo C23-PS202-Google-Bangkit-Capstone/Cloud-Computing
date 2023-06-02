@@ -13,7 +13,7 @@ steps:
     args:
       - "run"
       - "deploy"
-      - "gcloudstorageapi"
+      - "authenticationapi"
       - "--image"
       - "asia-southeast2-docker.pkg.dev/freshcheck-c23-ps202f/gcloudapi/authenticationapi:dev"
       - "--region"
