@@ -1,0 +1,27 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - "build"
+      - "--tag=asia-southeast2-docker.pkg.dev/freshcheck-c23-ps202f/gcloudapi/authenticationapi:dev"
+      - "."
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - "push"
+      - "asia-southeast2-docker.pkg.dev/freshcheck-c23-ps202f/gcloudapi/authenticationapiapi:dev"
+
+  - name: "gcr.io/cloud-builders/gcloud"
+    args:
+      - "run"
+      - "deploy"
+      - "gcloudstorageapi"
+      - "--image"
+      - "asia-southeast2-docker.pkg.dev/freshcheck-c23-ps202f/gcloudapi/authenticationapiapi:dev"
+      - "--region"
+      - "asia-southeast2"
+      - "--platform"
+      - "managed"
+      - "--allow-unauthenticated"
+      - "--min-instances"
+      - "1"
+      - "--max-instances"
+      - "2"
