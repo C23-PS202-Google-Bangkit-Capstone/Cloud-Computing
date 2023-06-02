@@ -12,6 +12,7 @@ const dbQuery = util.promisify(db.query).bind(db);
 //REGISTER
 router.post('/register', signupValidation, async (req, res) => {
     try {
+        const username = req.body.username;
         const email = req.body.email;
         const password = req.body.password;
         const phone_number = req.body.phone_number;
@@ -37,7 +38,7 @@ router.post('/register', signupValidation, async (req, res) => {
         // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const insertUserQuery = `INSERT INTO user (email, password, phone_number, location) VALUES ('${email}', '${hashedPassword}', '${phone_number}', '${location}')`;
+        const insertUserQuery = `INSERT INTO user (username, email, password, phone_number, location) VALUES ('${email}', '${hashedPassword}', '${phone_number}', '${location}')`;
         await new Promise((resolve, reject) => {
             db.query(insertUserQuery, (err, result) => {
                 if (err) {
@@ -59,7 +60,8 @@ router.post('/register', signupValidation, async (req, res) => {
     }
 });
 
-router.post('/login', loginValidation, async (req, res, next) => {
+//LOGIN
+router.post('/login', loginValidation, async (req, res) => {
     try {
         const queryResult = await new Promise((resolve, reject) => {
             db.query(
@@ -79,7 +81,7 @@ router.post('/login', loginValidation, async (req, res, next) => {
                 msg: 'Email or password is incorrect!'
             });
         }
-
+            //Checking password dan hash 
         const passwordMatch = await new Promise((resolve, reject) => {
             bcrypt.compare(
                 req.body.password,
@@ -138,9 +140,9 @@ router.get("/search", async (req, res) => {
 //Lihat semua data recipe
 router.get("/getRecipeData", async (req, res) => {
     try {
-        const page = parseInt(req.query.page) || 1; // Get the page number from the query parameter, default to page 1 if not provided
-        const limit = 3; // Number of items per page
-        const offset = (page - 1) * limit; // Calculate the offset based on the current page
+        const page = parseInt(req.query.page) || 1; 
+        const limit = 3; 
+        const offset = (page - 1) * limit; 
 
         const sqlQuery = `SELECT * FROM recipe LIMIT ${limit} OFFSET ${offset}`;
 
