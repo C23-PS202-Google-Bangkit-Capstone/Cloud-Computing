@@ -10,44 +10,55 @@ const dbQuery = util.promisify(db.query).bind(db);
 
 
 //REGISTER
-router.post('/register', signupValidation, (req, res, next) => {
-    db.query(
-        `SELECT * FROM user WHERE LOWER(email) = LOWER('${req.body.email}')`,
-        (err, result) => {
-            if (result.length > 0) {
-                return res.status(409).send({
-                    msg: 'Akun sudah terdaftar!'
-                });
-            } else {
-                // username is available
-                bcrypt.hash(req.body.password, 10, (err, hash) => {
-                    if (err) {
-                        console.log(err);
-                        return res.status(500).send({
-                            msg: 'Gagal melakukan hashing password.'
-                        });
-                    }
-                    db.query(
-                        `INSERT INTO user (email, password, phone_number, location) VALUES ('${req.body.email}', '${hash}', '${req.body.phone_number}', '${req.body.location}')`,
-                        (err, result) => {
-                            if (err) {
-                                console.log(err);
-                                return res.status(400).send({
-                                    msg: 'Gagal melakukan register.'
-                                });
-                            }
-                            return res.status(201).send({
-                                msg: 'User berhasil terdaftar'
-                            });
-                        }
-                    );
-                });
-            }
+router.post('/register', signupValidation, async (req, res) => {
+    try {
+        const email = req.body.email;
+        const password = req.body.password;
+        const phone_number = req.body.phone_number;
+        const location = req.body.location;
+
+        const checkEmailQuery = `SELECT * FROM user WHERE LOWER(email) = LOWER('${email}')`;
+        const existingUser = await new Promise((resolve, reject) => {
+            db.query(checkEmailQuery, (err, result) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+
+        if (existingUser.length > 0) {
+            return res.status(409).send({
+                msg: 'Akun sudah terdaftar!'
+            });
         }
-    );
+
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const insertUserQuery = `INSERT INTO user (email, password, phone_number, location) VALUES ('${email}', '${hashedPassword}', '${phone_number}', '${location}')`;
+        await new Promise((resolve, reject) => {
+            db.query(insertUserQuery, (err, result) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+
+        return res.status(201).send({
+            msg: 'User berhasil terdaftar'
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(400).send({
+            msg: 'Gagal melakukan register.'
+        });
+    }
 });
 
-//lOGIN 
 router.post('/login', loginValidation, async (req, res, next) => {
     try {
         const queryResult = await new Promise((resolve, reject) => {
@@ -104,11 +115,13 @@ router.post('/login', loginValidation, async (req, res, next) => {
     }
 });
 
+
+
 //Search
 router.get("/search", async (req, res) => {
     try {
-        const receiptname = req.query.receipt_name; 
-        const sqlQuery = `SELECT * FROM resep WHERE receipt_name = "${receiptname}"`;
+        const recipename = req.query.recipe_name; // Use req.query instead of req.params for query parameters
+        const sqlQuery = `SELECT * FROM recipe WHERE recipe_name = "${recipename}"`;
         const result = await new Promise((resolve, reject) => {
             db.query(sqlQuery, (err, result) => {
                 if (err) reject(err);
@@ -116,6 +129,44 @@ router.get("/search", async (req, res) => {
             });
         });
         return res.send(result);
+    } catch (err) {
+        console.error(err); // Log the error instead of throwing it
+        return res.status(500).json({ error: "Internal server error" }); // Return an error response
+    }
+});
+
+//Lihat semua data recipe
+router.get("/getRecipeData", async (req, res) => {
+    try {
+        const page = parseInt(req.query.page) || 1; // Get the page number from the query parameter, default to page 1 if not provided
+        const limit = 3; // Number of items per page
+        const offset = (page - 1) * limit; // Calculate the offset based on the current page
+
+        const sqlQuery = `SELECT * FROM recipe LIMIT ${limit} OFFSET ${offset}`;
+
+        const result = await new Promise((resolve, reject) => {
+            db.query(sqlQuery, (err, result) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+
+        const listRecipe = result.map((recipe) => ({
+            id: recipe.recipe_id,
+            name: recipe.recipe_name,
+            location: recipe.location,
+            description: recipe.recipe_detail,
+        }));
+
+        const response = {
+            message: "Recipes fetched successfully",
+            listStory: listRecipe,
+        };
+
+        return res.send(response);
     } catch (error) {
         console.log(error);
         return res.status(500).send({
