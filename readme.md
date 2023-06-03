@@ -9,6 +9,8 @@ We will connect the Machine Learning Model with Mobile App using Cloud (Google C
 API:
 - Authentication 
 - Uploading images
+- Search engine
+- Display
 
 ## Table of Contents
 
