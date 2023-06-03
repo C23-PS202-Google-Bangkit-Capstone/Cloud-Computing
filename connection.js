@@ -2,11 +2,12 @@ var mysql = require('mysql');
 
 //buat koneksi database
 const conn = mysql.createConnection({
-    host:'localhost',
-    user:'root',
-    password:'',
-    database:'db_test',
-    port : 3306
+    instanceName: 'freshcheck-c23-ps202f:asia-southeast2:freshcheck-db', // your socket connection path
+    credentials: '',
+    host: '34.101.96.86', // Your ip host
+    user: 'root', // Your username
+    password: '', // Your password
+    database: '' // Your database name
 });
 
 conn.connect((err)=>{
