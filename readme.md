@@ -9,6 +9,8 @@ We will connect the Machine Learning Model with Mobile App using Cloud (Google C
 API:
 - Authentication 
 - Uploading images
+- Search engine
+- Display
 
 ## Table of Contents
 
@@ -18,8 +20,16 @@ API:
 - [Contact](#Contact)
 
 ## Installation
-
-Provide instructions on how to install and set up your project. Include any dependencies or prerequisites that need to be installed.
+Install on local 
+```bash
+cd <branch name dir>
+```
+```bash
+npm install
+```
+```bash
+npm start
+```
 
 ## Usage
 
