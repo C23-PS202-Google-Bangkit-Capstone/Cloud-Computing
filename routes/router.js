@@ -161,6 +161,7 @@ router.get("/getRecipeData", async (req, res) => {
             name: recipe.recipe_name,
             location: recipe.location,
             description: recipe.recipe_detail,
+            img : recipe.recipt_img,
         }));
 
         const response = {
