@@ -38,7 +38,7 @@ router.post('/register', signupValidation, async (req, res) => {
         // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const insertUserQuery = `INSERT INTO user (username, email, password, phone_number, location) VALUES ('${email}', '${hashedPassword}', '${phone_number}', '${location}')`;
+        const insertUserQuery = `INSERT INTO user (username, email, password, phone_number, location) VALUES ('${username}','${email}', '${hashedPassword}', '${phone_number}', '${location}')`;
         await new Promise((resolve, reject) => {
             db.query(insertUserQuery, (err, result) => {
                 if (err) {
