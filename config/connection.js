@@ -6,7 +6,7 @@ const conn = mysql.createConnection({
     credentials: './credentials/user-upload.json',
     host: '34.101.96.86', // Your ip host
     user: 'root', // Your username
-    password: 'freshcheck', // Your password
+    password: '', // Your password
     database: 'fresh_db' // Your database name
 });
 
