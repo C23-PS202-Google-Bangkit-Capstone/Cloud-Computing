@@ -1,27 +1,27 @@
 steps:
-  - name: "gcr.io/cloud-builders/docker"
+  - name: 'gcr.io/cloud-builders/docker'
     args:
-      - "build"
-      - "--tag=asia-southeast2-docker.pkg.dev/freshcheck-c23-ps202f/gcloudapi/backendapi:prod"
-      - "."
-  - name: "gcr.io/cloud-builders/docker"
+      - 'build'
+      - '--tag=asia-southeast2-docker.pkg.dev/freshcheck-c23-ps202f/gcloudapi/backendapi:dev'
+      - '.'
+  - name: 'gcr.io/cloud-builders/docker'
     args:
-      - "push"
-      - "--tag=asia-southeast2-docker.pkg.dev/freshcheck-c23-ps202f/gcloudapi/backendapi:prod"
+      - 'push'
+      - 'asia-southeast2-docker.pkg.dev/freshcheck-c23-ps202f/gcloudapi/backendapi:dev'
 
-  - name: "gcr.io/cloud-builders/gcloud"
+  - name: 'gcr.io/cloud-builders/gcloud'
     args:
-      - "run"
-      - "deploy"
-      - "gcloudapi"
-      - "--image"
-      - "asia-southeast2-docker.pkg.dev/freshcheck-c23-ps202f/gcloudapi/backendapi:prod"
-      - "--region"
-      - "asia-southeast2"
-      - "--platform"
-      - "managed"
-      - "--allow-unauthenticated"
-      - "--min-instances"
-      - "1"
-      - "--max-instances"
-      - "2"
+      - 'run'
+      - 'deploy'
+      - 'backendapi'
+      - '--image'
+      - 'asia-southeast2-docker.pkg.dev/freshcheck-c23-ps202f/gcloudapi/backendapi:dev'
+      - '--region'
+      - 'asia-southeast2'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--min-instances'
+      - '1'
+      - '--max-instances'
+      - '2'
