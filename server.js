@@ -1,10 +1,9 @@
 const createError = require('http-errors');
 const express = require('express');
-const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const Router = require('..routes/router.js');
-const uploadApp = require('..controller/upload');
+const Router = require('../routes/router.js');
+const uploadApp = require('../controller/upload');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -14,7 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 let corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "*", 
 };
 app.use(cors(corsOptions));
 
