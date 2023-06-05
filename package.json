@@ -1,14 +1,13 @@
 {
-  "name": "authen-test",
+  "name": "backend-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Frico Simon & Ignatius Joshua",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
