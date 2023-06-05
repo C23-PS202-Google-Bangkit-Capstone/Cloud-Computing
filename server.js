@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const Router = require('.routes/router.js');
+const Router = require('..routes/router.js');
 
 
 // Bikin instance buat express
