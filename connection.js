@@ -6,8 +6,8 @@ const conn = mysql.createConnection({
     credentials: '',
     host: '34.101.96.86', // Your ip host
     user: 'root', // Your username
-    password: '', // Your password
-    database: '' // Your database name
+    password: 'freshcheck', // Your password
+    database: 'freshcheck-db' // Your database name
 });
 
 conn.connect((err)=>{
