@@ -2,11 +2,11 @@ const createError = require('http-errors');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const Router = require('../routes/router.js');
-const uploadApp = require('../controller/upload');
+const Router = require('./routes/router');
+const uploadApp = require('./controller/upload');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 app.use(express.json());
 app.use(bodyParser.json());
