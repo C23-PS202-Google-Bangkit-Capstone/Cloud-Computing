@@ -8,11 +8,11 @@ RUN npm install
 
 COPY . . 
 
-COPY .env /.env
+COPY ./controller/env ./controller/env
 
-COPY ./controller/credentials/user-upload.json ./credentials/user-upload.json
+COPY ./controller/credentials/user-upload.json ./controller/credentials/user-upload.json
 
-COPY ./config/credentials/user-upload.json ./credentials/user-upload-2.json
+COPY ./config/credentials/user-upload.json ./config/credentials/user-upload.json
 
 EXPOSE 8080
 
