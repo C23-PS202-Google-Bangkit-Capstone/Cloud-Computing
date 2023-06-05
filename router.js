@@ -122,7 +122,7 @@ router.post('/login', loginValidation, async (req, res) => {
 //Search
 router.get("/search", async (req, res) => {
     try {
-        const recipename = req.query.recipe_name; // Use req.query instead of req.params for query parameters
+        const recipename = req.query.recipe_name; 
         const sqlQuery = `SELECT * FROM recipe WHERE recipe_name = "${recipename}"`;
         const result = await new Promise((resolve, reject) => {
             db.query(sqlQuery, (err, result) => {
@@ -132,8 +132,8 @@ router.get("/search", async (req, res) => {
         });
         return res.send(result);
     } catch (err) {
-        console.error(err); // Log the error instead of throwing it
-        return res.status(500).json({ error: "Internal server error" }); // Return an error response
+        console.error(err); 
+        return res.status(500).json({ error: "Internal server error" }); 
     }
 });
 
@@ -174,6 +174,24 @@ router.get("/getRecipeData", async (req, res) => {
         return res.status(500).send({
             msg: 'Internal server error'
         });
+    }
+});
+
+//Menampilkan Additional Information
+router.get("/getAdditionaldata", async (req, res) => {
+    try {
+        const fruitId = req.query.fruit_id
+        const sqlQuery = `SELECT detail FROM information WHERE fruit_id = "${fruitId}"`; 
+        const result = await new Promise((resolve, reject) => {
+            db.query(sqlQuery, (err, result) => {
+                if (err) reject(err);
+                resolve(result);
+            });
+        });
+        return res.send(result);
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Internal server error" });
     }
 });
 
