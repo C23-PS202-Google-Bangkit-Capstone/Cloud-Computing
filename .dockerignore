@@ -1,0 +1,9 @@
+node_modules
+Dockerfile
+package-lock.json
+cloudbuild.yaml
+readme.md
+run.sh
+.gitignore
+.git
+.Dockerignore
