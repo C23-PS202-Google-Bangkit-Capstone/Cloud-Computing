@@ -3,7 +3,7 @@ const express = require('express');
 const multer = require('multer');
 const { Storage } = require('@google-cloud/storage');
 
-const userKey = process.env.USER_UPLOAD_KEY;
+const userKey = process.env.USER_UPLOAD_KEY || './controller/credentials/user-upload.json';
 const storage = new Storage({ keyFilename: userKey });
 
 const filterImg = (req, file, callback) => {
@@ -37,7 +37,7 @@ app.post('/upload', uploadImg.single('image'), (req, res) => {
     return;
   }
 
-  const bucketName = process.env.BUCKET_NAME;
+  const bucketName = process.env.BUCKET_NAME || 'freshcheck-c23-ps202f';
   const bucket = storage.bucket(bucketName);
 
   const blob = bucket.file(`upload/${img.originalname}`);
