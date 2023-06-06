@@ -193,14 +193,10 @@ router.get("/getAdditionaldata", async (req, res) => {
                 if (err) reject(err);
                 resolve(result);
             });
-        });
-        const listdetail = result.map((information) => ({
-            description: information.detail
-        }));
-
+          });
         const response = {
             message: "Detail fetched successfully",
-            listinformation : listdetail,
+            Description :result,
         };
         return res.send(response);
     } catch (err) {
