@@ -196,7 +196,7 @@ router.get("/getAdditionaldata", async (req, res) => {
           });
         const response = {
             message: "Detail fetched successfully",
-            Description :result,
+            Description :result[0],
         };
         return res.send(response);
     } catch (err) {
