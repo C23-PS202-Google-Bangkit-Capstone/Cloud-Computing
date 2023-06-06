@@ -6,7 +6,6 @@ const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const util = require('util');
-const axios = require('axios');
 const dbQuery = util.promisify(db.query).bind(db);
 
 
@@ -122,21 +121,30 @@ router.post('/login', loginValidation, async (req, res) => {
 
 //Search
 router.get("/search", async (req, res) => {
-    try {
-        const recipename = req.query.recipe_name;
-        const sqlQuery = `SELECT * FROM recipe WHERE recipe_name = "${recipename}"`;
-        const result = await new Promise((resolve, reject) => {
-            db.query(sqlQuery, (err, result) => {
-                if (err) reject(err);
-                resolve(result);
-            });
-        });
-        return res.send(result);
-    } catch (err) {
-        console.error(err); // Log the error instead of throwing it
-        return res.status(500).json({ error: "Internal server error" }); // Return an error response
-    }
+  try {
+    const recipename = req.query.recipe_name;
+    const sort = req.query.sort || 'recipe_name';
+    const sortOrder = req.query.sortOrder || 'ASC';
+    const pageSize = 5;
+    const currentPage = parseInt(req.query.page) || 1;
+    const offset = (currentPage - 1) * pageSize;
+
+    const sqlQuery = `SELECT * FROM recipe WHERE recipe_name LIKE "%${recipename}%" ORDER BY ${sort} ${sortOrder} LIMIT ${pageSize} OFFSET ${offset}`;
+
+    const result = await new Promise((resolve, reject) => {
+      db.query(sqlQuery, (err, result) => {
+        if (err) reject(err);
+        resolve(result);
+      });
+    });
+
+    return res.send(result);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: "Internal server error" });
+  }
 });
+
 
 //Lihat semua data recipe
 router.get("/getRecipeData", async (req, res) => {
