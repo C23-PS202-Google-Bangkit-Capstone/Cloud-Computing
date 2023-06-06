@@ -8,8 +8,6 @@ RUN npm install
 
 COPY . . 
 
-COPY ./controller/env ./controller/env
-
 COPY ./controller/credentials/user-upload.json ./controller/credentials/user-upload.json
 
 COPY ./config/credentials/user-upload.json ./config/credentials/user-upload.json
