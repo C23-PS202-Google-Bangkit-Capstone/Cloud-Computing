@@ -6,6 +6,7 @@ const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const util = require('util');
+const axios = require('axios');
 const dbQuery = util.promisify(db.query).bind(db);
 
 
@@ -156,17 +157,21 @@ router.get("/getRecipeData", async (req, res) => {
             });
         });
 
-        const listRecipe = result.map((recipe) => ({
-            id: recipe.recipe_id,
-            name: recipe.recipe_name,
-            location: recipe.location,
-            description: recipe.recipe_detail,
-            img : recipe.recipt_img,
+        const listRecipe = await Promise.all(result.map(async (recipe) => {
+            const imageResponse = await axios.get(recipe.recipe_img); // mengambil img dari url
+            const image = imageResponse.data; 
+            return {
+                id: recipe.recipe_id,
+                name: recipe.recipe_name,
+                location: recipe.location,
+                description: recipe.recipe_detail,
+                img: image,
+            };
         }));
 
         const response = {
             message: "Recipes fetched successfully",
-            listStory: listRecipe,
+            listRecipe: listRecipe,
         };
 
         return res.send(response);
