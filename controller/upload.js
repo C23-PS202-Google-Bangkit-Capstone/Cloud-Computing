@@ -3,7 +3,7 @@ const express = require('express');
 const multer = require('multer');
 const { Storage } = require('@google-cloud/storage');
 
-const userKey = process.env.USER_UPLOAD_KEY || './credentials/user-upload.json';
+const userKey = process.env.USER_UPLOAD_KEY || '/src/app/controller/credentials/user-upload.json';
 const storage = new Storage({ keyFilename: userKey });
 
 const filterImg = (req, file, callback) => {
