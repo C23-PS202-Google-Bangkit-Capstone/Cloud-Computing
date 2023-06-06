@@ -194,7 +194,15 @@ router.get("/getAdditionaldata", async (req, res) => {
                 resolve(result);
             });
         });
-        return res.send(result);
+        const listdetail = result.map((information) => ({
+            description: information.detail
+        }));
+
+        const response = {
+            message: "Detail fetched successfully",
+            listinformation : listdetail,
+        };
+        return res.send(response);
     } catch (err) {
         console.error(err);
         return res.status(500).json({ error: "Internal server error" });
