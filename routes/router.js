@@ -158,18 +158,17 @@ router.get("/getRecipeData", async (req, res) => {
         });
 
         const listRecipe = await Promise.all(result.map(async (recipe) => {
-            const imageResponse = await axios.get(recipe.recipe_img); // mengambil img dari url
-            const image = imageResponse.data; 
             return {
                 id: recipe.recipe_id,
                 name: recipe.recipe_name,
                 location: recipe.location,
                 description: recipe.recipe_detail,
-                img: image,
+                photoUrl: recipe.recipe_img, // Assuming the image URL is stored in the "recipe_img" column
             };
         }));
 
         const response = {
+            error: false,
             message: "Recipes fetched successfully",
             listRecipe: listRecipe,
         };
