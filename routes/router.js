@@ -123,13 +123,11 @@ router.post('/login', loginValidation, async (req, res) => {
 router.get("/search", async (req, res) => {
   try {
     const recipename = req.query.recipe_name;
-    const sort = req.query.sort || 'recipe_name';
-    const sortOrder = req.query.sortOrder || 'ASC';
     const pageSize = 5;
     const currentPage = parseInt(req.query.page) || 1;
     const offset = (currentPage - 1) * pageSize;
 
-    const sqlQuery = `SELECT * FROM recipe WHERE recipe_name LIKE "%${recipename}%" ORDER BY ${sort} ${sortOrder} LIMIT ${pageSize} OFFSET ${offset}`;
+    const sqlQuery = `SELECT * FROM recipe WHERE recipe_name LIKE "%${recipename}%" LIMIT ${pageSize} OFFSET ${offset}`;
 
     const result = await new Promise((resolve, reject) => {
       db.query(sqlQuery, (err, result) => {
@@ -137,8 +135,21 @@ router.get("/search", async (req, res) => {
         resolve(result);
       });
     });
+     const listRecipe = await Promise.all(result.map(async (recipe) => {
+            return {
+                id: recipe.recipe_id,
+                name: recipe.recipe_name,
+                location: recipe.location,
+                description: recipe.recipe_detail,
+                photoUrl: recipe.recipe_img, 
+            };
+        }));
 
-    return res.send(result);
+        const response = {
+            error: false,
+            message: "Recipes fetched successfully",
+            listRecipe: listRecipe,
+        };
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: "Internal server error" });
@@ -171,7 +182,7 @@ router.get("/getRecipeData", async (req, res) => {
                 name: recipe.recipe_name,
                 location: recipe.location,
                 description: recipe.recipe_detail,
-                photoUrl: recipe.recipe_img, // Assuming the image URL is stored in the "recipe_img" column
+                photoUrl: recipe.recipe_img, 
             };
         }));
 
