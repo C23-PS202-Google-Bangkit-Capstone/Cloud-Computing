@@ -227,6 +227,49 @@ router.get("/getAdditionaldata", async (req, res) => {
     }
 });
 
+//Display Recipe di akun
+router.get("/DisplayRecipe", async (req, res) => {
+    try {
+        const recipeloc = req.query.location
+        const page = parseInt(req.query.page) || 1;
+        const limit = 3;
+        const offset = (page - 1) * limit;
 
+        const sqlQuery = `SELECT * FROM recipe WHERE location = "${recipeloc}" LIMIT ${limit} OFFSET ${offset}`;
+
+        const result = await new Promise((resolve, reject) => {
+            db.query(sqlQuery, (err, result) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+
+        const listRecipe = await Promise.all(result.map(async (recipe) => {
+            return {
+                id: recipe.recipe_id,
+                name: recipe.recipe_name,
+                location: recipe.location,
+                description: recipe.recipe_detail,
+                photoUrl: recipe.recipe_img, 
+            };
+        }));
+
+        const response = {
+            error: false,
+            message: "Recipes fetched successfully",
+            listRecipe: listRecipe,
+        };
+
+        return res.send(response);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({
+            msg: 'Internal server error'
+        });
+    }
+});
 
 module.exports = router;
