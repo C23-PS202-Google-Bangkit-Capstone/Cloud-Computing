@@ -2,20 +2,20 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'build'
-      - '--tag=asia-southeast2-docker.pkg.dev/freshcheck-c23-ps202f/gcloudapi/backendapi:dev'
+      - '--tag=asia-southeast2-docker.pkg.dev/freshcheck-c23-ps202f/gcloudapi/freshcheckapi:dev'
       - '.'
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'push'
-      - 'asia-southeast2-docker.pkg.dev/freshcheck-c23-ps202f/gcloudapi/backendapi:dev'
+      - 'asia-southeast2-docker.pkg.dev/freshcheck-c23-ps202f/gcloudapi/freshcheckapi:dev'
 
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
       - 'run'
       - 'deploy'
-      - 'backendapi'
+      - 'freshcheck'
       - '--image'
-      - 'asia-southeast2-docker.pkg.dev/freshcheck-c23-ps202f/gcloudapi/backendapi:dev'
+      - 'asia-southeast2-docker.pkg.dev/freshcheck-c23-ps202f/gcloudapi/freshcheckapi:dev'
       - '--region'
       - 'asia-southeast2'
       - '--platform'
