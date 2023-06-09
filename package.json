@@ -1,5 +1,5 @@
 {
-  "name": "backend-api",
+  "name": "freshcheck-api",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -20,13 +20,9 @@
     "mysql": "^2.18.1",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
-	  "axios": "^1.4.0",
     "@google-cloud/storage": "^6.10.1",
 		"dotenv": "^16.0.3",
 		"ejs": "^3.1.9",
     "multer": "^1.4.5-lts.1"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.22"
   }
 }
