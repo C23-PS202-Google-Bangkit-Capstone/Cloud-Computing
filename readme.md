@@ -75,7 +75,83 @@ Run the script
 
 ## Usage
 
-Provide instructions on how to use your project. Include examples and guidelines to help users get started.
+Once you successfully deployed it into Cloud Run in Google Cloud Platform. You need to test it via postman or any other tools.
+
+#### Get Recipe Data
+
+```http
+  GET /api/getRecipeData
+```
+
+| Parameter (query) | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `page` | `integer` | **Optional / default = 1**. Pagination purpose |
+
+#### Get Additional Data / Intermezzo
+
+```http
+  GET /api/getAdditionalData
+```
+
+| Parameter (query) | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `fruit_id` | `integer` | **Required**. Specific item |
+
+#### Get Recipe Infos Based on User's Location
+
+```http
+  GET /api/DisplayRecipe
+```
+
+| Parameter (query) | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `page` | `integer` | **Optional / default = 1**. Pagination purpose |
+| `location` | `string` | **Required**. Specific location |
+
+#### Get Search Recipe (Search Bar)
+
+```http
+  GET /api/search
+```
+
+| Parameter (query) | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `recipe_name` | `string` | **Required**. Search recipe's name |
+
+#### Upload Image to GCS (Bucket)
+
+```http
+  POST /storage/upload
+```
+
+| Parameter (body) | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `image` | `image/png` | **Required**. Image file |
+
+#### Register User
+
+```http
+  POST /api/register
+```
+
+| Parameter (body) | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `username` | `string` | **Required**. Must be 4 or more characters |
+| `email` | `string` | **Required**. @gmail |
+| `password` | `string` | **Required**. Must be 6 or more characters |
+| `phone_number` | `string` | **Required**. Max 12 |
+| `location` | `string` | **Required**. Province |
+
+#### User Login
+
+```http
+  POST /api/login
+```
+
+| Parameter (body) | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `email` | `string` | **Required**. @gmail |
+| `password` | `string` | **Required**. Must be 6 or more characters |
 
 ## License
 
