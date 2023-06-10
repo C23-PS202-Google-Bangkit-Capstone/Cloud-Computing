@@ -23,7 +23,8 @@ We will integrate all the three learning paths (Machine Learning, Cloud Computin
 - [Installation](#installation)
 - [Usage](#usage)
 - [License](#license)
-- [Contact](#Contact)
+- [Contact](#Contact) 
+- [Acknowledgments](#Acknowledgments)
 
 ## Installation
 ### Run Locally
@@ -161,3 +162,13 @@ Apache License 2.0
 
 Frico Simon - [LinkedIn](https://www.linkedin.com/in/fricosimon/)  
 Ignatius Joshua - [LinkedIn](https://www.linkedin.com/in/ignatius-joshua/)
+
+## Acknowledgments
+
+We would like to acknowledge the following resources that have been instrumental in the development of this project:
+
+- [Deploy MySQL API to GCP](https://billmartin.io/blog/how-to-build-and-deploy-a-nodejs-api-on-google-cloud#connect-to-the-db-with-a-client) by Bill Martin: This article provided valuable insights on deploying a Node.js API on Google Cloud Platform and connecting to a MySQL database.
+- [Upload File from Node.js](https://dev.to/kamalhossain/upload-file-to-google-cloud-storage-from-nodejs-server-5cdg) by Kamal Hossain: This article guided us through the process of uploading files from a Node.js server to Google Cloud Storage.
+- And many more contributors who have provided valuable resources and support for this project.
+We express our gratitude to these authors for their contributions and for sharing their knowledge and expertise.
+
