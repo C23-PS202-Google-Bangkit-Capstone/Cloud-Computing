@@ -19,7 +19,7 @@ app.use(cors(corsOptions));
 
 app.use('/api', Router);
 
-app.use('/upload', uploadApp);
+app.use('/storage', uploadApp);
 
 app.use((err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
