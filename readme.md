@@ -19,12 +19,14 @@ We will integrate all the three learning paths (Machine Learning, Cloud Computin
   Stay tuned for additional features that will be added to enhance the functionality and user experience.
 
 ## Cloud Architecture 
-
+<div align="center">
+    <img src="https://storage.googleapis.com/freshcheck-c23-ps202f/asset/cloud%20infras.png" alt="Cloud Infrastructure" width="700" height="400">
+</div>
 
 ## Table of Contents
 
+- [Prerequisites](#Prerequisites)v
 - [Installation](#installation)
-- [Prerequisites](#Prerequisites)
 - [Usage](#usage)
 - [License](#license)
 - [Contact](#Contact) 
