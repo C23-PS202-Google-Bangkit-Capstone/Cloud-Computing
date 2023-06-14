@@ -25,7 +25,7 @@ We will integrate all the three learning paths (Machine Learning, Cloud Computin
 
 ## Table of Contents
 
-- [Prerequisites](#Prerequisites)v
+- [Prerequisites](#Prerequisites)
 - [Installation](#installation)
 - [Usage](#usage)
 - [License](#license)
