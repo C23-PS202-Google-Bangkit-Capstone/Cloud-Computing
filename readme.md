@@ -18,13 +18,23 @@ We will integrate all the three learning paths (Machine Learning, Cloud Computin
 - More features coming soon!  
   Stay tuned for additional features that will be added to enhance the functionality and user experience.
 
+## Cloud Architecture 
+
+
 ## Table of Contents
 
 - [Installation](#installation)
+- [Prerequisites](#Prerequisites)
 - [Usage](#usage)
 - [License](#license)
 - [Contact](#Contact) 
 - [Acknowledgments](#Acknowledgments)
+
+## Prerequisites
+- Cloud Storage (Open access to public)
+- MySQL Instance and Database
+- Artifact Registry
+- Service Account with required permission (Write)
 
 ## Installation
 ### Run Locally
